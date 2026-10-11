@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="Detail produk MW75 Custom Wireless ANC Headphones" />
+    <title>MW75 Custom — Atelier Audio</title>
+    <link rel="stylesheet" href="./styles.css" />
+    <script type="module" src="./app.js" defer></script>
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="Atelier Audio beranda">ATELIER<span>AUDIO</span></a>
+      <nav aria-label="Navigasi utama"><a href="#product">Produk</a><a href="#summary">Ringkasan</a></nav>
+    </header>
+
+    <main id="product" class="page-shell">
+      <p class="eyebrow">COLLECTION  /  MW75 CUSTOM</p>
+      <section id="loading" class="state-card" aria-live="polite">Memuat detail produk…</section>
+      <section id="error" class="state-card error-state" hidden aria-live="assertive">
+        <h1>Produk belum dapat dimuat</h1><p id="error-message">Coba muat ulang halaman.</p><button id="retry" class="button button-dark" type="button">Coba lagi</button>
+      </section>
+
+      <section id="product-content" class="product-grid" hidden>
+        <div class="gallery">
+          <div class="image-frame"><img id="product-image" alt="" /><div id="image-fallback" class="image-fallback" hidden>MW75</div></div>
+          <div class="gallery-caption"><span>ENGINEERED FOR FOCUS</span><span>01 / 01</span></div>
+        </div>
+        <div class="product-info">
+          <p class="eyebrow">WIRELESS ANC HEADPHONES</p>
+          <h1 id="product-name"></h1><p id="product-description" class="description"></p>
+          <p id="product-price" class="price"></p>
+          <div class="rule"></div>
+          <fieldset class="option-group"><legend>Warna / ukuran</legend><div id="variants" class="variant-list"></div><p id="variant-status" class="stock-copy" role="status"></p></fieldset>
+          <div class="option-group"><label class="toggle-row" for="engraving"><span><strong>Personal engraving</strong><small>Tambah sentuhan personal · Rp350.000</small></span><input id="engraving" type="checkbox" /><span class="toggle" aria-hidden="true"></span></label><div id="engraving-fields" hidden><label class="input-label" for="engraving-text">Teks engraving</label><input id="engraving-text" class="text-input" maxlength="12" autocomplete="off" placeholder="MAKS. 12 KARAKTER" /><div class="input-meta"><span>Huruf dan angka</span><span id="character-count">0 / 12</span></div><p id="engraving-error" class="field-error" role="alert" hidden></p><p id="engraving-preview" class="engraving-preview" aria-live="polite">YOUR INITIALS</p></div></div>
+          <div class="quantity-row"><div><span class="input-label">Jumlah</span><span id="stock-total" class="stock-copy"></span></div><div class="quantity-control"><button id="decrease" type="button" aria-label="Kurangi jumlah">−</button><output id="quantity" aria-live="polite">1</output><button id="increase" type="button" aria-label="Tambah jumlah">+</button></div></div>
+          <div class="purchase-card"><div><span>Total</span><strong id="total-price" aria-live="polite"></strong></div><button id="confirm" class="button button-dark" type="button">Lanjutkan</button><p id="confirm-message" class="confirm-message" role="status" hidden></p></div>
+        </div>
+      </section>
+      <section id="summary" class="summary" hidden><p class="eyebrow">ORDER SUMMARY</p><h2>Pesanan siap dikonfirmasi.</h2><p id="summary-text"></p></section>
+    </main>
+  </body>
+</html>

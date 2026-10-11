@@ -1,0 +1,33 @@
+{
+  "name": "product-detail-api",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=22 <25"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "migrate": "node src/database/migrate.js",
+    "seed": "node src/database/seed.js",
+    "check": "node --check src/server.js && node --check src/app.js && node --check src/database/migrate.js && node --check src/database/seed.js && npm run openapi:check && npm run test:unit",
+    "openapi:check": "node scripts/validate-openapi.js",
+    "test": "npm run check",
+    "test:unit": "node --test tests/unit/error-handler.test.js tests/unit/product.validator.test.js tests/unit/product.serializer.test.js",
+    "test:integration": "node --test tests/integration/api.integration.test.js"
+  },
+  "dependencies": {
+    "ajv": "^8.17.1",
+    "ajv-formats": "^3.0.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^5.1.0",
+    "pg": "^8.16.3",
+    "swagger-ui-express": "^5.0.1",
+    "yaml": "^2.8.1"
+  },
+  "devDependencies": {
+    "@apidevtools/swagger-parser": "^12.1.0"
+  }
+}

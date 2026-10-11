@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f3ee">
+  <meta name="description" content="MW75 Custom Wireless ANC Headphones dengan detail premium dan engraving personal.">
+  <title>MW75 Custom Headphones | Atelier Audio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="announcement">Kirim gratis untuk setiap pesanan di atas Rp5.000.000</div>
+  <header class="site-header">
+    <a class="wordmark" href="#top" aria-label="Atelier Audio, beranda">ATELIER<span> / </span>AUDIO</a>
+    <nav class="main-nav" aria-label="Navigasi utama">
+      <a href="#produk">Headphones</a>
+      <a href="#customize">Personalisasi</a>
+      <a href="#detail">Cerita MW75</a>
+    </nav>
+    <a class="bag-link" href="#pesan">Tas belanja <span aria-hidden="true">(0)</span></a>
+  </header>
+
+  <main id="top">
+    <div class="breadcrumb"><a href="#top">Beranda</a><span>/</span><a href="#produk">Headphones</a><span>/</span><span>MW75 Custom</span></div>
+
+    <section class="product-layout" id="produk" aria-labelledby="product-title">
+      <div class="gallery-column">
+        <div class="product-stage">
+          <span class="edition-tag"><span></span> EDISI PERSONAL</span>
+          <img class="product-image" id="product-image" src="images/headphone-matte-black.jpg.jpeg" alt="Headphone MW75 premium berwarna Matte Black">
+          <div class="engraving-preview" id="engraving-preview" aria-live="polite" hidden>
+            <span class="preview-label">ENGRAVING PREVIEW</span>
+            <span class="preview-text" id="preview-text"></span>
+          </div>
+          <span class="image-index">01 <i></i> 03</span>
+        </div>
+        <div class="gallery-thumbnails" aria-label="Galeri produk">
+          <button class="thumbnail is-active" type="button" aria-label="Tampilan headphone Matte Black" data-image="images/headphone-matte-black.jpg.jpeg">
+            <img src="images/headphone-matte-black.jpg.jpeg" alt="">
+          </button>
+          <button class="thumbnail" type="button" aria-label="Tampilan detail headphone" data-image="images/headphone 2.jpeg">
+            <img src="images/headphone 2.jpeg" alt="">
+          </button>
+          <button class="thumbnail" type="button" aria-label="Tampilan headphone dari samping" data-image="images/headphone-gunmetal.jpg.jpeg">
+            <img src="images/headphone-gunmetal.jpg.jpeg" alt="">
+          </button>
+          <p>Dirancang untuk didengar. Dibuat untuk dimiliki.</p>
+        </div>
+      </div>
+
+      <div class="details-column">
+        <div class="product-heading">
+          <p class="eyebrow">MASTER &amp; DYNAMIC <span>×</span> TUMI</p>
+          <h1 id="product-title">MW75 Custom<br>Wireless ANC Headphones</h1>
+          <div class="rating"><span aria-label="5 dari 5 bintang">★★★★★</span><a href="#detail">4.9 <span>(128 ulasan)</span></a></div>
+          <p class="price">Rp8.999.000 <span>Termasuk pajak</span></p>
+        </div>
+
+        <p class="product-description" id="detail">Aluminium anodized, kulit domba premium, dan kaca tempered berpadu dalam headphone over-ear yang dibuat untuk perjalanan panjang dan mendengarkan dengan fokus.</p>
+
+        <div class="option-group color-group">
+          <div class="option-title"><span>Warna</span><span class="selected-color" id="selected-color">Matte Black</span></div>
+          <div class="swatches" role="group" aria-label="Pilih warna headphone">
+            <button class="swatch is-selected" type="button" aria-label="Matte Black" aria-pressed="true" data-color="Matte Black" data-image="images/headphone-matte-black.jpg.jpeg" style="--swatch-color:#242523"></button>
+            <button class="swatch" type="button" aria-label="Gunmetal" aria-pressed="false" data-color="Gunmetal" data-image="images/headphone-gunmetal.jpg.jpeg" style="--swatch-color:#777a79"></button>
+            <button class="swatch" type="button" aria-label="Silver" aria-pressed="false" data-color="Silver" data-image="images/headphone-silver.jpg.jpeg" style="--swatch-color:#c7c8c5"></button>
+          </div>
+        </div>
+
+        <section class="customization" id="customize" aria-labelledby="custom-title">
+          <div class="custom-heading">
+            <div><span class="step-label">01 / PERSONALISASI</span><h2 id="custom-title">Custom engraving</h2></div>
+            <span class="custom-price">+ Rp350.000</span>
+          </div>
+          <label class="engraving-toggle">
+            <input id="engraving-toggle" type="checkbox">
+            <span class="toggle-mark" aria-hidden="true"></span>
+            <span>Tambah Engraving</span>
+          </label>
+          <div class="engraving-field" id="engraving-field" hidden>
+            <label for="engraving-input">Teks engraving <span id="character-count">0 / 12</span></label>
+            <input id="engraving-input" type="text" maxlength="12" placeholder="Contoh: ADI 2026" autocomplete="off" disabled>
+            <p>Hingga 12 karakter. Huruf dan angka akan diukir dengan presisi.</p>
+          </div>
+        </section>
+
+        <div class="purchase-row" id="pesan">
+          <div class="quantity-control" aria-label="Jumlah produk">
+            <button type="button" id="quantity-minus" aria-label="Kurangi jumlah">−</button>
+            <output id="quantity" aria-live="polite">1</output>
+            <button type="button" id="quantity-plus" aria-label="Tambah jumlah">+</button>
+          </div>
+          <button class="submit-button" type="button" id="confirm-order">Konfirmasi Pesanan <span aria-hidden="true">↗</span></button>
+        </div>
+        <div class="confirmation-message" id="confirmation-message" role="status" aria-live="polite" hidden></div>
+        <p id="stock-status" class="stock-status" role="status" aria-live="polite"></p>
+        <p class="delivery-note"><span aria-hidden="true">↗</span> Gratis ongkir &amp; garansi resmi 2 tahun</p>
+      </div>
+    </section>
+
+    <section class="feature-strip" aria-label="Keunggulan produk">
+      <div><span>01</span><p>Active Noise<br>Cancellation</p></div>
+      <div><span>02</span><p>Hingga 32 jam<br>waktu dengar</p></div>
+      <div><span>03</span><p>Suara khas<br>Master &amp; Dynamic</p></div>
+      <div><span>04</span><p>Dibuat dengan<br>material premium</p></div>
+    </section>
+  </main>
+
+  <footer class="site-footer"><a class="wordmark" href="#top">ATELIER<span> / </span>AUDIO</a><p>Suara yang terasa personal.</p><span>© 2026 Atelier Audio</span></footer>
+</body>
+</html>

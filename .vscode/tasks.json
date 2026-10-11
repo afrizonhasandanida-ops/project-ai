@@ -1,0 +1,54 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+			"label": "Start Product API",
+			"type": "shell",
+			"command": "npm --prefix api-project start",
+			"isBackground": true,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start Product API Database",
+			"type": "shell",
+			"command": "docker compose -f api-project/docker-compose.yml up -d",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start Docker Desktop",
+			"type": "shell",
+			"command": "docker desktop start",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Start Product API Database Retry",
+			"type": "shell",
+			"command": "docker compose -f api-project/docker-compose.yml up -d",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check Product API Startup",
+			"type": "shell",
+			"command": "npm --prefix api-project start",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Check Product API Port",
+			"type": "shell",
+			"command": "docker compose -f api-project/docker-compose.yml ps",
+			"isBackground": false,
+			"problemMatcher": []
+		},
+		{
+			"label": "Probe Product API",
+			"type": "shell",
+			"command": "curl.exe -i http://127.0.0.1:3000/api-docs/",
+			"isBackground": false,
+			"problemMatcher": []
+		}
+	]
+}

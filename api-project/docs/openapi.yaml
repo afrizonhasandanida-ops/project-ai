@@ -1,0 +1,313 @@
+openapi: 3.1.0
+info:
+  title: Product Detail API
+  version: 1.0.0
+  description: >-
+    REST API katalog produk dan variasi untuk halaman Detail Produk.
+    Request dan response menggunakan JSON:API.
+servers:
+  - url: http://localhost:3000
+    description: Development lokal
+tags:
+  - name: Products
+    description: Katalog produk dan variasinya
+paths:
+  /api/products:
+    get:
+      tags: [Products]
+      summary: Ambil daftar produk
+      operationId: listProducts
+      responses:
+        '200':
+          description: Daftar resource produk; array dapat kosong
+          content:
+            application/vnd.api+json:
+              schema:
+                type: object
+                required: [data]
+                properties:
+                  data:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/ProductResource'
+              examples:
+                productList:
+                  value:
+                    data:
+                      - type: products
+                        id: b6ed8dd3-03d6-4b7e-8a92-659f5cbdde78
+                        attributes:
+                          name: MW75 Custom Wireless ANC Headphones
+                          price: 8999000
+                          image: /images/headphone-matte-black.jpg.jpeg
+                          description: Headphone over-ear premium dengan ANC.
+                          stock: 12
+                          variants:
+                            colorOrSize:
+                              - { name: Matte Black, image: /images/headphone-matte-black.jpg.jpeg, stock: 4 }
+                              - { name: Gunmetal, image: /images/headphone-gunmetal.jpg.jpeg, stock: 4 }
+                              - { name: Silver, image: /images/headphone-silver.jpg.jpeg, stock: 4 }
+                          createdAt: '2026-10-09T00:00:00.000Z'
+                        links:
+                          self: /api/products/b6ed8dd3-03d6-4b7e-8a92-659f5cbdde78
+        '406':
+          $ref: '#/components/responses/JsonApiError'
+        '500':
+          $ref: '#/components/responses/JsonApiError'
+    post:
+      tags: [Products]
+      summary: Buat produk beserta variasi
+      operationId: createProduct
+      security:
+        - ProductWriteApiKey: []
+      description: >-
+        Endpoint create hanya untuk klien internal tepercaya. Akses publik
+        memerlukan autentikasi dan otorisasi yang belum termasuk scope.
+      requestBody:
+        required: true
+        content:
+          application/vnd.api+json:
+            schema:
+              $ref: '#/components/schemas/CreateProductDocument'
+            examples:
+              mw75:
+                value:
+                  data:
+                    type: products
+                    attributes:
+                      name: MW75 Custom Wireless ANC Headphones
+                      price: 8999000
+                      image: /images/headphone-matte-black.jpg.jpeg
+                      description: Headphone over-ear premium dengan ANC.
+                      variants:
+                        colorOrSize:
+                          - { name: Matte Black, image: /images/headphone-matte-black.jpg.jpeg, stock: 4 }
+                          - { name: Gunmetal, image: /images/headphone-gunmetal.jpg.jpeg, stock: 4 }
+                          - { name: Silver, image: /images/headphone-silver.jpg.jpeg, stock: 4 }
+      responses:
+        '201':
+          description: Produk berhasil dibuat
+          headers:
+            Location:
+              description: URL resource produk yang dibuat
+              schema:
+                type: string
+                format: uri-reference
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/SingleProductDocument'
+        '400':
+          $ref: '#/components/responses/JsonApiError'
+        '401':
+          $ref: '#/components/responses/JsonApiError'
+        '406':
+          $ref: '#/components/responses/JsonApiError'
+        '409':
+          $ref: '#/components/responses/JsonApiError'
+        '413':
+          $ref: '#/components/responses/JsonApiError'
+        '415':
+          $ref: '#/components/responses/JsonApiError'
+        '500':
+          $ref: '#/components/responses/JsonApiError'
+  /api/products/{id}:
+    get:
+      tags: [Products]
+      summary: Ambil detail produk
+      operationId: getProductById
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: UUID produk
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Resource produk
+          content:
+            application/vnd.api+json:
+              schema:
+                $ref: '#/components/schemas/SingleProductDocument'
+        '400':
+          $ref: '#/components/responses/JsonApiError'
+        '404':
+          $ref: '#/components/responses/JsonApiError'
+        '406':
+          $ref: '#/components/responses/JsonApiError'
+        '500':
+          $ref: '#/components/responses/JsonApiError'
+components:
+  securitySchemes:
+    ProductWriteApiKey:
+      type: apiKey
+      in: header
+      name: X-API-Key
+  schemas:
+    SingleProductDocument:
+      type: object
+      required: [data]
+      properties:
+        data:
+          $ref: '#/components/schemas/ProductResource'
+    ProductResource:
+      type: object
+      required: [type, id, attributes, links]
+      properties:
+        type:
+          const: products
+        id:
+          type: string
+          format: uuid
+        attributes:
+          $ref: '#/components/schemas/ProductAttributes'
+        links:
+          type: object
+          required: [self]
+          properties:
+            self:
+              type: string
+              format: uri-reference
+    ProductAttributes:
+      type: object
+      required: [name, price, image, description, stock, variants, createdAt]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 120
+        price:
+          type: integer
+          minimum: 0
+          maximum: 2147483647
+        image:
+          type: string
+          description: Path relatif lokal atau URL HTTPS.
+        description:
+          type: string
+          minLength: 1
+          maxLength: 2000
+        stock:
+          type: integer
+          minimum: 0
+        variants:
+          $ref: '#/components/schemas/ProductVariants'
+        createdAt:
+          type: string
+          format: date-time
+    ProductVariants:
+      type: object
+      required: [colorOrSize]
+      properties:
+        colorOrSize:
+          type: array
+          items:
+            $ref: '#/components/schemas/ProductVariant'
+    ProductVariant:
+      type: object
+      required: [name, stock]
+      properties:
+        name:
+          type: string
+          minLength: 1
+          maxLength: 60
+        image:
+          type: string
+          description: Foto variasi; jika tidak ada gunakan foto utama.
+        stock:
+          type: integer
+          minimum: 0
+          maximum: 1000000
+    CreateProductDocument:
+      type: object
+      additionalProperties: false
+      required: [data]
+      properties:
+        data:
+          type: object
+          additionalProperties: false
+          required: [type, attributes]
+          properties:
+            type:
+              const: products
+            attributes:
+              type: object
+              additionalProperties: false
+              required: [name, price, image, description, variants]
+              properties:
+                name:
+                  type: string
+                  minLength: 1
+                  maxLength: 120
+                price:
+                  type: integer
+                  minimum: 0
+                  maximum: 2147483647
+                image:
+                  type: string
+                  description: Path relatif lokal atau URL HTTPS.
+                description:
+                  type: string
+                  minLength: 1
+                  maxLength: 2000
+                variants:
+                  type: object
+                  additionalProperties: false
+                  required: [colorOrSize]
+                  properties:
+                    colorOrSize:
+                      type: array
+                      minItems: 1
+                      maxItems: 50
+                      items:
+                        type: object
+                        additionalProperties: false
+                        required: [name, stock]
+                        properties:
+                          name:
+                            type: string
+                            minLength: 1
+                            maxLength: 60
+                          image:
+                            type: string
+                          stock:
+                            type: integer
+                            minimum: 0
+                            maximum: 1000000
+    JsonApiErrorDocument:
+      type: object
+      required: [errors]
+      properties:
+        errors:
+          type: array
+          minItems: 1
+          items:
+            $ref: '#/components/schemas/JsonApiError'
+    JsonApiError:
+      type: object
+      required: [status, code, title, detail]
+      properties:
+        status:
+          type: string
+        code:
+          type: string
+        title:
+          type: string
+        detail:
+          type: string
+        source:
+          type: object
+          properties:
+            pointer:
+              type: string
+            parameter:
+              type: string
+  responses:
+    JsonApiError:
+      description: Error dalam format JSON:API
+      content:
+        application/vnd.api+json:
+          schema:
+            $ref: '#/components/schemas/JsonApiErrorDocument'
